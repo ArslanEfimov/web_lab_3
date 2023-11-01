@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <h:outputStylesheet library="styles" name="indexStyles.css"/>
+    <h:outputStylesheet library="styles" name="animationRotate.css"/>
+</h:head>
+<h:body>
+    <div id="header">
+        <p>Ефимов Арслан Альбертович P3232</p>
+        <p>Вариант - 9292</p>
+    </div>
+    <div id = "middle">
+        <div id = "clock-selection">
+            <ui:include src="templates/clock.xhtml"/>
+                <div class = "date-time" id = "date-time-selection">
+                    <p id = "date">Date:  </p>
+                    <p id = "time">Time:  </p>
+                </div>
+        <div id = "button-container">
+            <h:link outcome="main.xhtml">
+                <h:commandButton type="submit"
+                                 class = "button-result"
+                                 id = "to-main-page-button"
+                                 value="Перейти на главную страницу"/>
+            </h:link>
+        </div>
+        </div>
+    </div>
+    <div id = "footer">
+        <div class = "rotate-shadows" id = "rotate-selection">
+
+        </div>
+        <div id ="author-selection">
+        <p id = "author-paragraph">Coding by EfimovArslan</p>
+            <h:graphicImage id = "github-image" library="images" name="github.jpeg"/>
+        </div>
+    </div>
+    <ui:insert name="script">
+        <h:outputScript library="js" name="clock.js"/>
+    </ui:insert>
+</h:body>
+</html>

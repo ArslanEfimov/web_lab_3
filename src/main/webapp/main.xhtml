@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+        <h:outputStylesheet library="styles" name="mainStyles.css"/>
+        <h:outputStylesheet library="styles" name="table.css"/>
+</h:head>
+<h:body>
+    <div id = "header">
+        <p>Ефимов Арслан Альбертович P3232</p>
+        <p>Вариант - 9292</p>
+    </div>
+    <div id = "back-button">
+    <h:link outcome="index.xhtml">
+        <div class="cl-btn-4"></div>
+    </h:link>
+    </div>
+    <div id = "container">
+        <div id = "middle-zone">
+            <div id = "top-selection">
+                Enter coordinates
+            </div>
+            <h:form id = "coordinates-form">
+                <div id = "left-selection">
+                    <div id = "X-select">
+                        <h:outputLabel for = "X-select">Enter X: </h:outputLabel>
+                        <div id ="radio-row">
+                            <h:selectOneRadio id = "x-radio-1" class = "coordinates-x" value="#{coordinateBean.x}" layout="lineDirection" name = "X">
+                                <f:selectItem  itemLabel="-3" itemValue="-3"/>
+                                <f:selectItem  itemLabel="-2" itemValue="-2"/>
+                                <f:selectItem  itemLabel="-1" itemValue="-1"/>
+                                <f:selectItem  itemLabel="0" itemValue="0"/>
+                                <f:selectItem  itemLabel="1" itemValue="1"/>
+                                <f:selectItem  itemLabel="2" itemValue="2"/>
+                                <f:selectItem  itemLabel="3" itemValue="3"/>
+                                <f:selectItem  itemLabel="4" itemValue="4"/>
+                                <f:selectItem  itemLabel="5" itemValue="5"/>
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                    <div id = "Y-input">
+                        <h:outputLabel for  = "Y-input" >Enter Y: </h:outputLabel>
+                        <div id="y-input-container">
+                            <h:inputText id = "input-y-coordinate" class = "style-y-input" value="#{coordinateBean.y}"  name = "Y" a:placeholder = "[-3; 3]" maxlength="7">
+                                <f:converter converterId="customDoubleConverter"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <div id = "R-commandLink">
+                        <h:outputLabel for  = "R-commandLink" >Enter R: </h:outputLabel>
+                        <div class = "row-R-1">
+                            <p:commandLink  type = "button" class = "input-button" value="1" name = "R" actionListener="#{coordinateBean.setR(1)}" >
+                                <f:ajax event="click" execute="@this updateColor"/>
+                            </p:commandLink>
+                            <p:commandLink type = "button" class = "input-button" value="2" name = "R" actionListener="#{coordinateBean.setR(2)}" />
+                            <p:commandLink  type = "button" class = "input-button" value="3" name = "R" actionListener="#{coordinateBean.setR(3)}" />
+                        </div>
+                        <div class = "row-R-1">
+                            <p:commandLink  type = "button" class = "input-button" value="4" name = "R" actionListener="#{coordinateBean.setR(4)}" >
+                                <f:ajax event="click" execute="@this updateColor"/>
+                            </p:commandLink>
+                            <p:commandLink  type = "button" class = "input-button" value="5" name = "R" actionListener="#{coordinateBean.setR(5)}" >
+                                <f:ajax event="click" execute="@this updateColor"/>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                    <div id = "error-messages">
+                        <h:messages id="messages" showDetail="true" showSummary="false" />
+                    </div>
+                    <div id = "button-container">
+                        <div id = "sub-button">
+                            <h:commandButton id = "submit-button"
+                                             class = "button-result"
+                                             type="submit"
+                                             value="Perform a check">
+                                <f:ajax execute="@form" listener="#{areaCheckerResultBean.addNewValues()}" render="table messages"/>
+                            </h:commandButton>
+                        </div>
+                        <div id = "clr-button">
+                            <h:commandButton id = "clear-button"
+                                             class = "button-clear"
+                                             type="submit"
+                                             value="Clear">
+                                <f:ajax listener="#{areaCheckerResultBean.clearTable()}" render="table"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <div id = "image-selection">
+            <div id = "calculator">
+            </div>
+        </div>
+        <div id = "table-selection">
+            <h:dataTable id = "table" class = "result-table" value="#{areaCheckerResultBean.resultsTable}" var="resultTable">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{resultTable.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{resultTable.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{resultTable.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время исполнения</f:facet>
+                    #{resultTable.executionTime}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Текущее время</f:facet>
+                    <h:outputText value="#{resultTable.localDateTime}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Результат</f:facet>
+                    <h:outputText value="#{resultTable.result ? 'Попадание' : 'Промах'}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </div>
+    <h:form id="graphSelect">
+        <p:growl showDetail="true" id = "error-dots" sticky="true"/>
+        <h:inputHidden id="graph-x" value="#{coordinateBean.x}" />
+        <h:inputHidden id="graph-y" value="#{coordinateBean.y}" />
+        <p:remoteCommand name="updateBeanValues" update="graph-x graph-y table error-dots"
+                         action="#{areaCheckerResultBean.addNewValues()}"/>
+    </h:form>
+    <ui:insert name="scripts">
+        <script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6" type="text/javascript">
+        </script>
+        <h:outputScript library="js" name="Graph.js"/>
+        <h:outputScript library="js" name = "validateDots.js" />
+        <h:outputScript library="js" name = "validate.js"/>
+        <h:outputScript>
+            <ui:repeat value="#{areaCheckerResultBean.resultsTable}" var="res">
+                if(checkResult(#{res.x}, #{res.y}, #{res.r})) {
+                    drawDotsGreen(#{res.x}, #{res.y});
+                }else{
+                    drawDotsRed(#{res.x}, #{res.y});
+                }
+            </ui:repeat>
+        </h:outputScript>
+        <h:outputScript id = "updateColor">
+            <ui:repeat value="#{areaCheckerResultBean.resultsTable}" var="dotsRes">
+                coordinatesArray.push(#{dotsRes.x}, #{dotsRes.y});
+            </ui:repeat>
+        </h:outputScript>
+    </ui:insert>
+</h:body>
+</html>

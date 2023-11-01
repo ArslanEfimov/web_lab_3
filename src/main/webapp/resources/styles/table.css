@@ -1,0 +1,22 @@
+.result-table{
+    border: 1px solid black;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: black;
+    color: white;
+    max-height: 400px;
+    overflow-y: scroll;
+    box-shadow: -8px 0 8px 0 rgba(178, 49, 49, 0.68);
+}
+
+th {
+    padding: 5px 25px 5px 25px;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+td {
+    font-size: 15px;
+    text-align: center;
+    font-weight: lighter;
+}
