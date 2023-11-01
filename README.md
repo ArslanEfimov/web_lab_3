@@ -1,6 +1,6 @@
 # web_lab_3
 ## var 9292
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=web-lab-3+var)](https://github.com/ArslanEfimov/web-lab-2/)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=web-lab-3)](https://github.com/ArslanEfimov/web-lab-2/)
 <img src="src/main/webapp/resources/images/graphic.png" width="320" height="300" alt="graph_pic"/>
 
 
