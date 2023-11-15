@@ -223,7 +223,7 @@ body .ui-commandlink:hover, body .ui-link:hover {
 }
 
 #table-selection {
-    width: 580px;
+    width: 620px;
     max-height: 400px; /* Установите желаемую максимальную высоту */
     overflow-y: auto;
 }

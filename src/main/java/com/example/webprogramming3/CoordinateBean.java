@@ -23,7 +23,6 @@ public class CoordinateBean implements Serializable {
     private Double r;
 
     public CoordinateBean(){
-
     }
 
     public Double getX() {

@@ -1,4 +1,4 @@
-.result-table{
+.ui-datatable ui-widget result-table{
     border: 1px solid black;
     margin: 20px auto;
     border-collapse: collapse;
@@ -9,13 +9,60 @@
     box-shadow: -8px 0 8px 0 rgba(178, 49, 49, 0.68);
 }
 
+body .ui-datatable thead th{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+body .ui-datatable .ui-paginator.ui-paginator-top{
+    opacity: 100%;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: normal;
+}
+.ui-state-default{
+
+    box-shadow: -2px 0 8px 0 rgba(178, 49, 49, 0.68);
+}
+
+body .ui-datatable .ui-datatable-data>tr>td{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+body .ui-paginator .ui-paginator-current, body .ui-paginator .ui-paginator-rpp-options{
+    color: white;
+    opacity: 1;
+}
+
+body .ui-paginator .ui-paginator-prev{
+    color: white;
+    opacity: 1;
+}
+
+body .ui-paginator .ui-paginator-next{
+    color: white;
+    opacity: 1;
+}
+#table_paginator_bottom{
+    display: none;
+}
+
+#table_paginator_top{
+    opacity: 1;
+}
 th {
     padding: 5px 25px 5px 25px;
     font-size: 15px;
     font-weight: lighter;
 }
 
-td {
+th > td{
     font-size: 15px;
     text-align: center;
     font-weight: lighter;

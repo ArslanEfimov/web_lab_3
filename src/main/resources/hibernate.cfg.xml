@@ -4,8 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.username">your user name</property>
-        <property name="hibernate.connection.password">your data base passwd</property>
+        <property name="hibernate.connection.username">your username</property>
+        <property name="hibernate.connection.password">your database pwd</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/studs</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>

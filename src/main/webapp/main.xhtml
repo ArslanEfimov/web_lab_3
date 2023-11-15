@@ -99,32 +99,34 @@
             </div>
         </div>
         <div id = "table-selection">
-            <h:dataTable id = "table" class = "result-table" value="#{areaCheckerResultBean.resultsTable}" var="resultTable">
-                <h:column>
+            <p:dataTable id = "table" class = "result-table" value="#{areaCheckerResultBean.resultsTable}"
+                         var="resultTable" paginator="true" rows="4"
+                         paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}">
+                <p:column>
                     <f:facet name="header">X</f:facet>
                     #{resultTable.x}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">Y</f:facet>
                     #{resultTable.y}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">R</f:facet>
                     #{resultTable.r}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">Время исполнения</f:facet>
                     #{resultTable.executionTime}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">Текущее время</f:facet>
                     <h:outputText value="#{resultTable.localDateTime}" />
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">Результат</f:facet>
                     <h:outputText value="#{resultTable.result ? 'Попадание' : 'Промах'}"/>
-                </h:column>
-            </h:dataTable>
+                </p:column>
+            </p:dataTable>
         </div>
     </div>
     <h:form id="graphSelect">
