@@ -2,11 +2,16 @@ package com.example.webprogramming3;
 
 import com.example.webprogramming3.DataBase.HibernateUtils;
 import com.example.webprogramming3.DataBase.TableDaoImpl;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.inject.Inject;
+
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -18,11 +23,14 @@ import java.util.SortedMap;
 
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class AreaCheckerResultBean implements Serializable {
     @Inject
     private CoordinateBean coordinateBean;
     private LinkedList<AreaResultBean> resultsTable;
+    @Inject
+    private Area areaBeanImpl;
+
 
 
 
@@ -34,6 +42,12 @@ public class AreaCheckerResultBean implements Serializable {
         }catch (SQLException ex){}
     }
 
+    @PostConstruct
+    public void init(){
+        areaBeanImpl.definePointsCount(resultsTable.size());
+        areaBeanImpl.defineCorrectPointsCount(resultsTable.stream().filter(AreaResultBean::isResult).toList().size());
+        areaBeanImpl.defineIncorrectPointsCount(areaBeanImpl.getIncorrectPoints());
+    }
 
     public CoordinateBean getCoordinateBean() {
         return coordinateBean;
@@ -76,6 +90,11 @@ public class AreaCheckerResultBean implements Serializable {
             return;
         }
         boolean result = AreaChecker.getAreaResult(x, y, r);
+        if(result){
+            areaBeanImpl.registerCorrectNewPoint();
+        }else{
+            areaBeanImpl.registerIncorrectPoint();
+        }
         areaResultBean.setX(x);
         areaResultBean.setY(y);
         areaResultBean.setR(r);
@@ -92,6 +111,7 @@ public class AreaCheckerResultBean implements Serializable {
             tableDao.addValuesToTable(areaResultBean);
         } catch (SQLException ex) {}
         resultsTable.addLast(areaResultBean);
+        areaBeanImpl.registerNewPoint();
 
 
     }
@@ -103,6 +123,8 @@ public class AreaCheckerResultBean implements Serializable {
         }catch (SQLException ex){}
 
         resultsTable.clear();
+        areaBeanImpl.definePointsCount(0);
+        areaBeanImpl.defineIncorrectPointsCount(0);
         coordinateBean.setR(null);
     }
 

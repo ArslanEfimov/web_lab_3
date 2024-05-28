@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:jsp="http://java.sun.com/jsf/composite">
 <h:head>
         <h:outputStylesheet library="styles" name="mainStyles.css"/>
         <h:outputStylesheet library="styles" name="table.css"/>
@@ -79,7 +79,7 @@
                                              class = "button-result"
                                              type="submit"
                                              value="Perform a check">
-                                <f:ajax execute="@form" listener="#{areaCheckerResultBean.addNewValues()}" render="table messages"/>
+                                <f:ajax execute="@form" listener="#{areaCheckerResultBean.addNewValues()}" render="table messages m-bean-result"/>
                             </h:commandButton>
                         </div>
                         <div id = "clr-button">
@@ -87,7 +87,7 @@
                                              class = "button-clear"
                                              type="submit"
                                              value="Clear">
-                                <f:ajax listener="#{areaCheckerResultBean.clearTable()}" render="table"/>
+                                <f:ajax listener="#{areaCheckerResultBean.clearTable()}" render="table m-bean-result"/>
                             </h:commandButton>
                         </div>
                     </div>
@@ -99,6 +99,10 @@
             </div>
         </div>
         <div id = "table-selection">
+            <div id = "counter_selection">
+                <h:outputText id = "m-bean-result" value="Points count: #{area.pointsCount} (#{area.secondMiss ? 'You are looser!' : ''} )"/>
+                <h:outputText id = "m-bean-click" value="Click time interval: #{clickInterval.averageInterval}"/>
+            </div>
             <p:dataTable id = "table" class = "result-table" value="#{areaCheckerResultBean.resultsTable}"
                          var="resultTable" paginator="true" rows="4"
                          paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}">
@@ -133,9 +137,13 @@
         <p:growl showDetail="true" id = "error-dots" sticky="true"/>
         <h:inputHidden id="graph-x" value="#{coordinateBean.x}" />
         <h:inputHidden id="graph-y" value="#{coordinateBean.y}" />
-        <p:remoteCommand name="updateBeanValues" update="graph-x graph-y table error-dots"
+        <p:remoteCommand name="updateBeanValues" update="graph-x graph-y table error-dots m-bean-result m-bean-click"
                          action="#{areaCheckerResultBean.addNewValues()}"/>
+        <p:remoteCommand name="updateTime" update="m-bean-click" action="#{clickInterval.addClick()}"/>
     </h:form>
+    <p:remoteCommand name="loadMBean"
+                     update="m-bean-result"
+                     autoRun="true"/>
     <ui:insert name="scripts">
         <script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6" type="text/javascript">
         </script>

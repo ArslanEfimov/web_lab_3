@@ -5,7 +5,7 @@
 }
 
 body{
-    background-image: url("https://w.forfun.com/fetch/ba/baca08a54e4f85736e59935a7bdd0cf2.jpeg");
+    background-image: url("https://pic.uma.media/pic/cardimage/55/1c/551c31114fce81b8233efa499c1971b7.jpg");
     background-size: cover;
     background-attachment: fixed;
 }
@@ -75,6 +75,9 @@ tbody  td{
 
 
 }
+#m-bean-result{
+    color: white;
+}
 #top-selection{
     background-color: #000017;
     color: #ffffff;
@@ -87,6 +90,9 @@ tbody  td{
     border-color: rgb(48, 52, 52);
     border-radius: 0.6em;
 
+}
+#m-bean-click{
+    color: white;
 }
 #left-selection{
     display: flex;
@@ -103,6 +109,10 @@ tbody  td{
     width: 100%;
     justify-content: space-around;
     flex-direction: column;
+}
+#counter_selection{
+    box-shadow: -15px 0 10px 0 rgba(0,0,0,0.2);
+    background-color: #282626;
 }
 
 #X-select{

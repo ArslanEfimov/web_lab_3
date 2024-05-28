@@ -2,8 +2,6 @@ let elt = document.getElementById('calculator');
 const commandLinks = document.querySelectorAll(".input-button");
 let r = 0;
 let coordinatesArray = [];
-
-
 commandLinks.forEach(function (link){
     link.addEventListener('click', (event) =>{
         r = parseFloat(link.textContent.trim());
@@ -101,6 +99,7 @@ function handleGraphClick(evt, r) {
         }
     }
     updateBeanValues();
+    updateTime();
 }
 function drawGraph(rValue) {
     // Предотвращаем стандартную отправку формы

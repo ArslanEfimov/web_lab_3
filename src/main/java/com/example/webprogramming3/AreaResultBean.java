@@ -1,5 +1,6 @@
 package com.example.webprogramming3;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "RESULT_TABLE")
 @Named
-@SessionScoped
+@ApplicationScoped
 public class AreaResultBean implements Serializable {
 
 

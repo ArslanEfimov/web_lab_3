@@ -1,5 +1,6 @@
 package com.example.webprogramming3;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class CoordinateBean implements Serializable {
 
     private Double x;
